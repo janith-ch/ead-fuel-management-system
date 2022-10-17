@@ -2,11 +2,11 @@
 
 namespace EAD.Models
 {
-    public class FuelStation
+    public class FuelStations
     {
         public ObjectId Id { get; set; }
         public int FuelStationId { get; set; }
-        public string FuelStationName { get; set; }
-        public String Location { get; set; }
+        public string FuelStationName { get; set; } = "";
+        public String Location { get; set; } = "";
     }
 }

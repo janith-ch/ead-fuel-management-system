@@ -887,11 +887,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\JontyRulz\\Desktop\\EAD\\EAD\\EAD\\EAD.csproj",
+      "projectUniqueName": "C:\\Users\\JontyRulz\\Desktop\\EAD GIt\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\EAD.csproj",
       "projectName": "EAD",
-      "projectPath": "C:\\Users\\JontyRulz\\Desktop\\EAD\\EAD\\EAD\\EAD.csproj",
+      "projectPath": "C:\\Users\\JontyRulz\\Desktop\\EAD GIt\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\EAD.csproj",
       "packagesPath": "C:\\Users\\JontyRulz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\JontyRulz\\Desktop\\EAD\\EAD\\EAD\\obj\\",
+      "outputPath": "C:\\Users\\JontyRulz\\Desktop\\EAD GIt\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\JontyRulz\\AppData\\Roaming\\NuGet\\NuGet.Config",
