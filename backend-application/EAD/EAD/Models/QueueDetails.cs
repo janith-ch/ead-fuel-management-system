@@ -2,13 +2,13 @@
 
 namespace EAD.Models
 {
-    public class FuelDetails
+    public class QueueDetails
     {
         public ObjectId Id { get; set; }
-        public int FuelDetailId{ get; set; }
+        public int QueueId { get; set; }
+        public string VehicleType { get; set; } = "";
         public string FuelType { get; set; } = "";
-        public int Capacity { get; set; } = 0;
-        public Boolean IsArrival { get; set; } = false;
+        public string Status { get; set; } = "";
         public int FuelStationId { get; set; }
     }
 }

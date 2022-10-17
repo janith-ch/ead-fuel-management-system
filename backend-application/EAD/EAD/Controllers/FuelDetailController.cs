@@ -7,10 +7,10 @@ namespace EAD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FuelStationController : ControllerBase
+    public class FuelDetailController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        public FuelStationController(IConfiguration configuration)
+        public FuelDetailController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -18,33 +18,33 @@ namespace EAD.Controllers
         public JsonResult Get()
         {
             MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
-            var datalist = client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").AsQueryable();
+            var datalist = client.GetDatabase("EADDb").GetCollection<FuelDetails>("FuelDetails").AsQueryable();
             return new JsonResult(datalist);
         }
         [HttpPost]
-        public JsonResult Post(FuelStations fuelStation)
+        public JsonResult Post(FuelDetails fuelDetails)
         {
             MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
-            int lastFuelStationId = client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").AsQueryable().Count();
-            fuelStation.FuelStationId = lastFuelStationId + 1;
-            client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").InsertOne(fuelStation);
+            int lastFuelDetailsId = client.GetDatabase("EADDb").GetCollection<FuelDetails>("FuelDetails").AsQueryable().Count();
+            fuelDetails.FuelDetailId = lastFuelDetailsId + 1;
+            client.GetDatabase("EADDb").GetCollection<FuelDetails>("FuelDetails").InsertOne(fuelDetails);
             return new JsonResult("Adding Successfull");
         }
         [HttpPut]
-        public JsonResult Put(FuelStations fuelStation)
+        public JsonResult Put(FuelDetails fuelDetails)
         {
             MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
-            var filter = Builders<FuelStations>.Filter.Eq("FuelStationId",fuelStation.FuelStationId);
-            var update = Builders<FuelStations>.Update.Set("FuelStationName", fuelStation.FuelStationName).Set("Location", fuelStation.Location);
-            client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").UpdateOne(filter,update);
+            var filter = Builders<FuelDetails>.Filter.Eq("FuelDetailId", fuelDetails.FuelDetailId);
+            var update = Builders<FuelDetails>.Update.Set("FuelType", fuelDetails.FuelType).Set("Capacity", fuelDetails.Capacity).Set("IsArrival", fuelDetails.IsArrival);
+            client.GetDatabase("EADDb").GetCollection<FuelDetails>("FuelDetails").UpdateOne(filter, update);
             return new JsonResult("Update Successfull");
         }
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {
             MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
-            var filter = Builders<FuelStations>.Filter.Eq("FuelStationId",id);
-            client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").DeleteOne(filter);
+            var filter = Builders<FuelDetails>.Filter.Eq("FuelDetailId", id);
+            client.GetDatabase("EADDb").GetCollection<FuelDetails>("FuelDetails").DeleteOne(filter);
             return new JsonResult("Delete Successfull");
         }
     }
