@@ -1,6 +1,7 @@
 ﻿using EAD.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace EAD.Controllers
@@ -46,6 +47,14 @@ namespace EAD.Controllers
             var filter = Builders<FuelStations>.Filter.Eq("FuelStationId",id);
             client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").DeleteOne(filter);
             return new JsonResult("Delete Successfull");
+        }
+        [HttpGet("{Location}")]
+        public JsonResult GetByLocation(string Location)
+        {
+            MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
+            var filter = Builders<FuelStations>.Filter.Eq("Location", Location);
+            var datalist = client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").Find(filter).ToList();
+            return new JsonResult(datalist);
         }
     }
 }

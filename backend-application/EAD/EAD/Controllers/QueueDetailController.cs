@@ -47,5 +47,14 @@ namespace EAD.Controllers
             client.GetDatabase("EADDb").GetCollection<QueueDetails>("QueueDetails").DeleteOne(filter);
             return new JsonResult("Delete Successfull");
         }
+        [HttpGet("{vehicleType}/{fuelType}/{fuelStationId}")]
+        public double Queue(string vehicleType, string fuelType, int fuelStationId)
+        {
+            MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
+            var filter = Builders<QueueDetails>.Filter.Eq("VehicleType", vehicleType) & Builders<QueueDetails>.Filter.Eq("FuelType", fuelType)
+                 & Builders<QueueDetails>.Filter.Eq("FuelStationId", fuelStationId) & Builders<QueueDetails>.Filter.Eq("Status", "OntheQueue");
+            double count = client.GetDatabase("EADDb").GetCollection<QueueDetails>("QueueDetails").Find(filter).Count();
+            return count;
+        }
     }
 }

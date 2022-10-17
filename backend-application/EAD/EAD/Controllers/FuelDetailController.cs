@@ -47,5 +47,15 @@ namespace EAD.Controllers
             client.GetDatabase("EADDb").GetCollection<FuelDetails>("FuelDetails").DeleteOne(filter);
             return new JsonResult("Delete Successfull");
         }
+        [HttpGet("{fuelType}/{fuelStationId}")]
+        public double AvailableFuelQuotation(string fuelType,int fuelStationId)
+        {
+            MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
+            var filter = Builders<FuelDetails>.Filter.Eq("FuelType", fuelType) & Builders<FuelDetails>.Filter.Eq("IsArrival", true) 
+                & Builders<FuelDetails>.Filter.Eq("FuelStationId", fuelStationId); 
+            var datalist = client.GetDatabase("EADDb").GetCollection<FuelDetails>("FuelDetails").Find(filter).ToList();
+            double total = datalist.Sum(item => item.Capacity);
+            return total;
+        }
     }
 }
