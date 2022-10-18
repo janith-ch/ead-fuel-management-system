@@ -36,7 +36,8 @@ namespace EAD.Controllers
         {
             MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
             var filter = Builders<FuelStations>.Filter.Eq("FuelStationId",fuelStation.FuelStationId);
-            var update = Builders<FuelStations>.Update.Set("FuelStationName", fuelStation.FuelStationName).Set("Location", fuelStation.Location);
+            var update = Builders<FuelStations>.Update.Set("FuelStationName", fuelStation.FuelStationName).Set("Location", fuelStation.Location)
+                .Set("Opentime", fuelStation.Opentime).Set("Closetime", fuelStation.Closetime);
             client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").UpdateOne(filter,update);
             return new JsonResult("Update Successfull");
         }
