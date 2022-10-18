@@ -10,5 +10,6 @@ namespace EAD.Models
         public string FuelType { get; set; } = "";
         public string Status { get; set; } = "";
         public int FuelStationId { get; set; }
+        public int UserId { get; set; }
     }
 }
