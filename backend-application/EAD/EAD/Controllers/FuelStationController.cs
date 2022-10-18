@@ -65,5 +65,13 @@ namespace EAD.Controllers
             var datalist = client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").Find(filter).ToList();
             return new JsonResult(datalist);
         }
+        [HttpGet("{FuelStationID}/getRelatedDataUsingID")]
+        public JsonResult GetByFuelStationID(int FuelStationID)
+        {
+            MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
+            var filter = Builders<FuelStations>.Filter.Eq("FuelStationId", FuelStationID);
+            var datalist = client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").Find(filter).ToList().First();
+            return new JsonResult(datalist);
+        }
     }
 }
