@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Fuel Master</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment users</string>
+    <string name="dashboard">dashboard</string>
+    <string name="stations">Fuel Stations</string>
+    <string name="create">create</string>
+    <string name="users">users</string>
+    <string name="space">space</string>
+    <string name="create_order">Create Order</string>
+    <string name="ongoing_order">Ongoing Orders</string>
+    <string name="created_date">Created Date:</string>
+    <string name="order_id">Order Id:</string>
+    <string name="date_from">Date From:</string>
+    <string name="date_to">Date To:</string>
+    <string name="dep_status">Department Status:</string>
+    <string name="edit">Update</string>
+    <string name="delete">Remove</string>
+</resources>
