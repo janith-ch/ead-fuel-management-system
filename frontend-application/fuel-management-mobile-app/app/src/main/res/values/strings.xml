@@ -18,11 +18,11 @@
     <string name="space">space</string>
     <string name="create_order">Create Order</string>
     <string name="ongoing_order">Ongoing Orders</string>
-    <string name="created_date">Created Date:</string>
-    <string name="order_id">Order Id:</string>
-    <string name="date_from">Date From:</string>
-    <string name="date_to">Date To:</string>
-    <string name="dep_status">Department Status:</string>
+    <string name="station_name">Station Name:</string>
+    <string name="station_location">Location:</string>
+    <string name="open_time">Open Time:</string>
+    <string name="close_time">Close Time :</string>
+    <string name="station_status">Station Status:</string>
     <string name="edit">Update</string>
     <string name="delete">Remove</string>
 </resources>

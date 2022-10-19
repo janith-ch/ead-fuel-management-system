@@ -1,17 +1,24 @@
 package com.example.fuel_management_mobile_app.adapter;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.fuel_management_mobile_app.R;
+import com.example.fuel_management_mobile_app.model.Station;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class FuelStationAdapter extends RecyclerView.Adapter<FuelStationAdapter.FuelStationViewHolder> {
+    public FuelStationAdapter(List<Station> fuelStations, Context context) {
+    }
+
     @NonNull
     @Override
     public FuelStationAdapter.FuelStationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,11 +44,11 @@ public class FuelStationAdapter extends RecyclerView.Adapter<FuelStationAdapter.
         public FuelStationViewHolder(View itemView) {
 
             super(itemView);
-//            this.textView_1 = (TextView) itemView.findViewById(R.id.delivery_ref);
-//            this.textView_2 = (TextView) itemView.findViewById(R.id.delivery_material);
-//            this.textView_3 = (TextView) itemView.findViewById(R.id.delivery_quantity);
-//            this.textView_4 = (TextView) itemView.findViewById(R.id.delivery_status);
-//            this.textView_5 = (TextView) itemView.findViewById(R.id.text_vehicle_no);
+            this.textView_1 = (TextView) itemView.findViewById(R.id.station_name_id);
+            this.textView_2 = (TextView) itemView.findViewById(R.id.station_location_id);
+            this.textView_3 = (TextView) itemView.findViewById(R.id.station_open_id);
+            this.textView_4 = (TextView) itemView.findViewById(R.id.station_close_id);
+            this.textView_5 = (TextView) itemView.findViewById(R.id.station_status);
 
             cardView = itemView.findViewById(R.id.fuel_station_list_card_view);
 
