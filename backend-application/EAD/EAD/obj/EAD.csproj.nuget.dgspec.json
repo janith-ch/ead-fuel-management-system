@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JontyRulz\\Desktop\\EAD GIt\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\EAD.csproj": {}
+    "D:\\SLIIT\\EAD\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\EAD.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JontyRulz\\Desktop\\EAD GIt\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\EAD.csproj": {
+    "D:\\SLIIT\\EAD\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\EAD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JontyRulz\\Desktop\\EAD GIt\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\EAD.csproj",
+        "projectUniqueName": "D:\\SLIIT\\EAD\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\EAD.csproj",
         "projectName": "EAD",
-        "projectPath": "C:\\Users\\JontyRulz\\Desktop\\EAD GIt\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\EAD.csproj",
-        "packagesPath": "C:\\Users\\JontyRulz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JontyRulz\\Desktop\\EAD GIt\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\obj\\",
+        "projectPath": "D:\\SLIIT\\EAD\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\EAD.csproj",
+        "packagesPath": "C:\\Users\\JANITH\\.nuget\\packages\\",
+        "outputPath": "D:\\SLIIT\\EAD\\ead-fuel-management-system\\backend-application\\EAD\\EAD\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\JontyRulz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\JANITH\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
