@@ -53,7 +53,7 @@ namespace EAD.Controllers
         {
             MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
             var filter = Builders<QueueDetails>.Filter.Eq("VehicleType", vehicleType) & Builders<QueueDetails>.Filter.Eq("FuelType", fuelType)
-                 & Builders<QueueDetails>.Filter.Eq("FuelStationId", fuelStationId) & Builders<QueueDetails>.Filter.Eq("Status", "OntheQueue");
+                 & Builders<QueueDetails>.Filter.Eq("FuelStationId", fuelStationId) & Builders<QueueDetails>.Filter.Eq("Status", "IntheQueue");
             double count = client.GetDatabase("EADDb").GetCollection<QueueDetails>("QueueDetails").Find(filter).Count();
             return count;
         }
