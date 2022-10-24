@@ -35,7 +35,8 @@ namespace EAD.Controllers
         {
             MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
             var filter = Builders<QueueDetails>.Filter.Eq("QueueId", queueDetails.QueueId);
-            var update = Builders<QueueDetails>.Update.Set("VehicleType", queueDetails.VehicleType).Set("FuelType", queueDetails.FuelType).Set("Status", queueDetails.Status).Set("FuelStationId", queueDetails.FuelStationId);
+            var update = Builders<QueueDetails>.Update.Set("VehicleType", queueDetails.VehicleType).Set("FuelType", queueDetails.FuelType)
+                .Set("Status", queueDetails.Status).Set("FuelStationId", queueDetails.FuelStationId).Set("UserId", queueDetails.UserId);
             client.GetDatabase("EADDb").GetCollection<QueueDetails>("QueueDetails").UpdateOne(filter, update);
             return new JsonResult("Update Successfull");
         }
@@ -52,9 +53,27 @@ namespace EAD.Controllers
         {
             MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
             var filter = Builders<QueueDetails>.Filter.Eq("VehicleType", vehicleType) & Builders<QueueDetails>.Filter.Eq("FuelType", fuelType)
-                 & Builders<QueueDetails>.Filter.Eq("FuelStationId", fuelStationId) & Builders<QueueDetails>.Filter.Eq("Status", "OntheQueue");
+                 & Builders<QueueDetails>.Filter.Eq("FuelStationId", fuelStationId) & Builders<QueueDetails>.Filter.Eq("Status", "IntheQueue");
             double count = client.GetDatabase("EADDb").GetCollection<QueueDetails>("QueueDetails").Find(filter).Count();
             return count;
+        }
+        [HttpGet("{UserId}")]
+        public JsonResult GetByUserID(string UserId)
+        {
+            MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
+            var filter = Builders<QueueDetails>.Filter.Eq("UserId", UserId);
+            var datalist = client.GetDatabase("EADDb").GetCollection<QueueDetails>("QueueDetails").Find(filter).ToList().First();
+            return new JsonResult(datalist);
+        }
+        [HttpPut("{UserId}/{status}")]
+        public JsonResult UpdateQueue(int UserId, string status, int fuelStationId)
+        {
+            MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
+            var filter = Builders<QueueDetails>.Filter.Eq("UserId", UserId) & Builders<QueueDetails>.Filter.Eq("Status", "IntheQueue") 
+                & Builders<QueueDetails>.Filter.Eq("FuelStationId", fuelStationId);
+            var update = Builders<QueueDetails>.Update.Set("Status", status);
+            client.GetDatabase("EADDb").GetCollection<QueueDetails>("QueueDetails").UpdateOne(filter, update);
+            return new JsonResult("Update Successfull");
         }
     }
 }
