@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,9 +25,11 @@ import com.example.fuel_management_mobile_app.constant.CommonConstant;
 import com.example.fuel_management_mobile_app.model.Station;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import lombok.SneakyThrows;
 
@@ -38,12 +41,17 @@ import lombok.SneakyThrows;
 public class FuelStation extends Fragment {
 
     FuelStationAdapter fuelStationAdapter;
+    RequestQueue requestQueue;
     private final List<Station> fuelStations = new ArrayList<>();
+    RecyclerView recyclerView;
+    Button dieselButton, petrolButton;
+
 
 
     public FuelStation() {
         // Required empty public constructor
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -57,7 +65,9 @@ public class FuelStation extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fuel_station, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.fuel_stations_recycle_view);
+        recyclerView = view.findViewById(R.id.fuel_stations_recycle_view);
+        dieselButton = view.findViewById(R.id.fuel_diesel_btn);
+        petrolButton = view.findViewById(R.id.fuel_petrol_btn);
         fuelStationAdapter = new FuelStationAdapter(fuelStations, getContext());
 
         recyclerView.setHasFixedSize(true);
@@ -70,9 +80,8 @@ public class FuelStation extends Fragment {
     private void getStations() {
 
         //RequestQueue initialized
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-
-       JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+        requestQueue = Volley.newRequestQueue(getContext());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
 
                 Request.Method.GET,
                 CommonConstant.BASE_URL.concat("FuelStation"),
@@ -93,13 +102,14 @@ public class FuelStation extends Fragment {
 
                             try {
 
-                             //   Station station= new Station();
-                                Station station = (Station) stations.get(i);
+                                Station station = new Station();
+                                JSONObject object = stations.getJSONObject(i);
 
-                                station.setFuelStationId(station.getFuelStationId());
-                                station.setLocation(station.getLocation());
-                                station.setOpentime(station.getOpentime());
-                                station.setClosetime(station.getClosetime());
+                                station.setFuelStationId(object.getInt("fuelStationId"));
+                                station.setFuelStationName(object.getString("fuelStationName"));
+                                station.setLocation(object.getString("location"));
+                                station.setOpentime(object.getString("opentime"));
+                                station.setClosetime(object.getString("closetime"));
 
                                 fuelStations.add(station);
 

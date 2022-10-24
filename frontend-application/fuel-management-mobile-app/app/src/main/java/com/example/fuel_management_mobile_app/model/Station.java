@@ -4,14 +4,32 @@ import androidx.annotation.NonNull;
 
 public class Station {
 
+    private Id id;
     private int fuelStationId;
     private String fuelStationName;
     private String location;
     private String opentime;
     private String closetime;
 
-    public Station(){
+    public Station() {
 
+    }
+
+    public Station(Id id, int fuelStationId, String fuelStationName, String location, String opentime, String closetime) {
+        this.id = id;
+        this.fuelStationId = fuelStationId;
+        this.fuelStationName = fuelStationName;
+        this.location = location;
+        this.opentime = opentime;
+        this.closetime = closetime;
+    }
+
+    public Id getId() {
+        return id;
+    }
+
+    public void setId(Id id) {
+        this.id = id;
     }
 
     public int getFuelStationId() {
@@ -54,15 +72,16 @@ public class Station {
         this.closetime = closetime;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "Station{" +
-                "fuelStationId=" + fuelStationId +
+                "id=" + id +
+                ", fuelStationId=" + fuelStationId +
                 ", fuelStationName='" + fuelStationName + '\'' +
                 ", location='" + location + '\'' +
                 ", opentime='" + opentime + '\'' +
                 ", closetime='" + closetime + '\'' +
                 '}';
     }
+
 }
