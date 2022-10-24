@@ -1,4 +1,5 @@
-﻿using EAD.Models;
+﻿using System.Text;
+using EAD.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
@@ -48,14 +49,36 @@ namespace EAD.Controllers
             return new JsonResult("Delete Successfull");
         }
         [HttpGet("{fuelType}/{fuelStationId}")]
-        public double AvailableFuelQuotation(string fuelType,int fuelStationId)
+        public JsonResult AvailableFuelQuotation(string fuelType,int fuelStationId)
         {
             MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
             var filter = Builders<FuelDetails>.Filter.Eq("FuelType", fuelType) & Builders<FuelDetails>.Filter.Eq("IsArrival", true) 
                 & Builders<FuelDetails>.Filter.Eq("FuelStationId", fuelStationId); 
             var datalist = client.GetDatabase("EADDb").GetCollection<FuelDetails>("FuelDetails").Find(filter).ToList();
+
             double total = datalist.Sum(item => item.Capacity);
-            return total;
+
+            var Finished_filter = Builders<QueueDetails>.Filter.Eq("FuelType", fuelType)
+                 & Builders<QueueDetails>.Filter.Eq("FuelStationId", fuelStationId) & Builders<QueueDetails>.Filter.Eq("Status", "Finished");
+            double Finished_count = client.GetDatabase("EADDb").GetCollection<QueueDetails>("QueueDetails").Find(Finished_filter).Count();
+
+            var IntheQueue_filter = Builders<QueueDetails>.Filter.Eq("FuelType", fuelType)
+                & Builders<QueueDetails>.Filter.Eq("FuelStationId", fuelStationId) & Builders<QueueDetails>.Filter.Eq("Status", "IntheQueue");
+            double IntheQueue_count = client.GetDatabase("EADDb").GetCollection<QueueDetails>("QueueDetails").Find(IntheQueue_filter).Count();
+
+            var forOneVehicle = 20;
+
+            double finished_fuel = Finished_count * forOneVehicle;
+            double remaning_fuel = total - finished_fuel;
+
+            var remaningVehicleCount = remaning_fuel / forOneVehicle;
+            remaningVehicleCount = remaningVehicleCount - IntheQueue_count;
+            var values = new Dictionary<string, double>();
+            values.Add("Capacity", remaning_fuel);
+            values.Add("Total_Available", remaningVehicleCount);
+            values.Add("In_Queue_count", IntheQueue_count);
+
+            return new JsonResult(values);
         }
     }
 }
