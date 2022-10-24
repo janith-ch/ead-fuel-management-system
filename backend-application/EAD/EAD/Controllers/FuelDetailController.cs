@@ -73,6 +73,7 @@ namespace EAD.Controllers
 
             var remaningVehicleCount = remaning_fuel / forOneVehicle;
             remaningVehicleCount = remaningVehicleCount - IntheQueue_count;
+
             var values = new Dictionary<string, double>();
             values.Add("Capacity", remaning_fuel);
             values.Add("Total_Available", remaningVehicleCount);
