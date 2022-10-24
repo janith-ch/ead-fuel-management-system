@@ -65,7 +65,7 @@ namespace EAD.Controllers
             var datalist = client.GetDatabase("EADDb").GetCollection<QueueDetails>("QueueDetails").Find(filter).ToList().First();
             return new JsonResult(datalist);
         }
-        [HttpGet("{UserId}/{status}")]
+        [HttpPut("{UserId}/{status}")]
         public JsonResult UpdateQueue(int UserId, string status, int fuelStationId)
         {
             MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
