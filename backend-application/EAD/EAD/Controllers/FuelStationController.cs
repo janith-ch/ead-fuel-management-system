@@ -37,7 +37,7 @@ namespace EAD.Controllers
             MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
             var filter = Builders<FuelStations>.Filter.Eq("FuelStationId",fuelStation.FuelStationId);
             var update = Builders<FuelStations>.Update.Set("FuelStationName", fuelStation.FuelStationName).Set("Location", fuelStation.Location)
-                .Set("Opentime", fuelStation.Opentime).Set("Closetime", fuelStation.Closetime).Set("UserId", fuelStation.UserId);
+                .Set("Opentime", fuelStation.Opentime).Set("Closetime", fuelStation.Closetime);
             client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").UpdateOne(filter,update);
             return new JsonResult("Update Successfull");
         }
@@ -55,22 +55,6 @@ namespace EAD.Controllers
             MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
             var filter = Builders<FuelStations>.Filter.Eq("Location", Location);
             var datalist = client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").Find(filter).ToList();
-            return new JsonResult(datalist);
-        }
-        [HttpGet("{UserId}/getRelatedFuelStations")]
-        public JsonResult GetByUserID(int UserId)
-        {
-            MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
-            var filter = Builders<FuelStations>.Filter.Eq("UserId", UserId);
-            var datalist = client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").Find(filter).ToList();
-            return new JsonResult(datalist);
-        }
-        [HttpGet("{FuelStationID}/getRelatedDataUsingID")]
-        public JsonResult GetByFuelStationID(int FuelStationID)
-        {
-            MongoClient client = new MongoClient(_configuration.GetConnectionString("EADApplicationConnection"));
-            var filter = Builders<FuelStations>.Filter.Eq("FuelStationId", FuelStationID);
-            var datalist = client.GetDatabase("EADDb").GetCollection<FuelStations>("FuelStation").Find(filter).ToList().First();
             return new JsonResult(datalist);
         }
     }

@@ -8,8 +8,8 @@ namespace EAD.Models
         public int FuelStationId { get; set; }
         public string FuelStationName { get; set; } = "";
         public String Location { get; set; } = "";
-        public String Opentime { get; set; } = "";
-        public String Closetime { get; set; } = "";
-        public int UserId { get; set; }
+        public String Opentime { get; set; }
+        public String Closetime { get; set; }
+
     }
 }
